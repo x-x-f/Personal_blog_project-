@@ -25,10 +25,9 @@ const actions = {
 };
 const mutations = {
   GETARTICLE(state, value) {
-    state.article.htmlText =value.content;
+    state.article.htmlText = converter.makeHtml(value.content);
     state.article.title = value.title;
     state.article.pub_date = value.pub_date;
-    // console.log(state.article);
   },
 };
 const getters = {};
