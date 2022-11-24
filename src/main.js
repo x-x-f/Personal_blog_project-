@@ -1,13 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
-// //全局组件
+//全局组件
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import CardContent from "./components/CardContent";
 import CardPage from "./components/CardPage";
 import CardList from "./components/CardList";
 import CardHot from "./components/CardHot";
-// //轮播图组件
+//轮播图组件
 import Carousel from "./components/Carousel";
 //第一参数：全局组件的名字，第二个参数：哪一个组件
 Vue.component(Navigation.name, Navigation);
@@ -146,17 +146,17 @@ Vue.component(Message);
 Vue.prototype.$message = Message;
 
 Vue.prototype.$confirm = MessageBox.confirm;
-// //引入ElementUI组件库
+//引入ElementUI组件库
 // import ElementUI from 'element-ui';
 // Vue.use(ElementUI)
-// //引入ElementUI全部样式
+//引入ElementUI全部样式
 // import 'element-ui/lib/theme-chalk/index.css';
 
 //引入swiper样式和js，全局可用
 import "swiper/dist/css/swiper.min.css";
 import "swiper/dist/js/swiper.min.js";
 
-// //测试接口
+//测试接口
 // import {reqCategoryList} from './api'
 // reqCategoryList()
 // import {reqGetSearchInfo} from './api'
@@ -177,4 +177,3 @@ new Vue({
   //注册仓库：组件实例的身上会多了一个属性$store.
   store,
 });
-// .$mount('#app')

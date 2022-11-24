@@ -10,7 +10,6 @@
     </div>
 </template>
 <script>
-import { reqgetArticleApi } from '@/api/index'
 import { mapState } from 'vuex';
 import "/node_modules/github-markdown-css/github-markdown.css"
 import showdown from 'showdown';
@@ -30,20 +29,7 @@ export default {
         ...mapState({ article: (state) => state.Homepage.article }),
     },
     mounted() {
-        this.getArticle(this.$route.params.id)
-    },
-    methods: {
-        async getArticle(id) {
-            const result = await reqgetArticleApi(id)
-            if (result.status) {
-                this.$message.error('信息获取失败')
-            }
-            if (this.article.title === '') {
-                this.article.htmlText = converter.makeHtml(result.data[0].content);
-                this.article.title = result.data[0].title;
-                this.article.pub_date = result.data[0].pub_date;
-            }
-        },
+        this.$store.dispatch('getArticle', this.$route.params.id);
     },
     beforeDestroy() {
         this.article.title = ''

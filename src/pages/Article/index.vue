@@ -1,9 +1,11 @@
 <template>
     <div>
+        <!-- 背景图 -->
         <div class="head-imgbox">
             <img class="imgavater" style="width: 100%;height: 100%;" v-lazy=urlPage alt="" />
         </div>
         <el-container>
+            <!-- 骨架屏相关代码 -->
             <template slot="template">
                 <el-skeleton-item variant="image" style="width: 100%; height: 580px;" />
                 <div style="padding: 14px;">
@@ -15,12 +17,14 @@
                     </div>
                 </div>
             </template>
+            <!-- 侧边栏组件 -->
             <el-aside width="25%" v-show="nacshow" style="padding-top: 5vw;margin-left: -10px;">
                 <CardHot></CardHot>
                 <CardList></CardList>
             </el-aside>
-            <!-- background-color:#f8f6f6; -->
-            <el-container style="padding-top: 6vw;" :class="nacshow ? 'content_flex_on' : 'content_flex_off'">
+            <!-- 文章相关代码 -->
+            <el-container style="padding-top: 45px;" :class="nacshow ? 'content_flex_on' : 'content_flex_off'">
+                <!-- 骨架屏 -->
                 <el-skeleton style="width:100%;" :loading="loading" animated :count="12">
                     <template slot="template">
                         <div style="padding: 14px;">
@@ -33,6 +37,9 @@
                         </div>
                     </template>
                     <template>
+                        <!-- 分类专栏组件 -->
+                        <ClassificationCard></ClassificationCard>
+                        <!-- 文章组件 -->
                         <el-card shadow="never" style="margin-bottom: 2vw;">
                             <ArticleContent :author="this.$route.query.author" :article_id="this.$route.params.id">
                             </ArticleContent>
@@ -45,7 +52,7 @@
 </template>
 <script>
 import ArticleContent from './ArticleContent/index.vue';
-
+import ClassificationCard from '@/components/ClassificationCard'
 export default {
     name: "Article",
     data() {
@@ -69,7 +76,7 @@ export default {
     },
     methods: {
     },
-    components: { ArticleContent }
+    components: { ArticleContent, ClassificationCard }
 }
 </script>
 <style scoped>

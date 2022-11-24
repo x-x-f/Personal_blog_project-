@@ -13,23 +13,23 @@
         <template>
             <el-card shadow="never">
                 <span class="round_date" v-show="nacshow">
-                    <span class="month">{{month}}</span><br>
-                    <span class="day">{{day}}</span>
+                    <span class="month">{{ month }}</span><br>
+                    <span class="day">{{ day }}</span>
                 </span>
-                <el-tooltip class="item" effect="light" :content="'文章分类'+cate_name" placement="bottom-end">
+                <el-tooltip class="item" effect="light" :content="'文章分类' + cate_name" placement="bottom-end">
                     <span class="tabs" v-show="nacshow">
-                        {{cate_name}}
+                        {{ cate_name }}
                     </span>
                 </el-tooltip>
                 <!-- <article v-html="htmlCode" v-highlight class="markdown-body"></article> -->
                 <header class="header">
                     <h2>
                         <a @click="goArticle">
-                            {{article.title}}
+                            {{ article.title }}
                         </a>
                     </h2>
-                    <div class="pub_date">{{author}} • 发表于<span>{{year}}年{{month}}{{day}}日 •
-                            {{article.visit_number}}浏览 • </span></div>
+                    <div class="pub_date">{{ author }} • 发表于<span>{{ year }}年{{ month }}{{ day }}日 •
+                            {{ article.visit_number }}浏览 • </span></div>
                 </header>
                 <div
                     style="width:80%; margin-left:10%; height:25vw; max-height:300px;overflow: hidden; text-align: center;">
@@ -67,7 +67,7 @@ export default {
     props: ['article', 'nacshow'],
     mounted() {
         this.loading = true
-        setTimeout(() => (this.loading = false), 1000)
+        setTimeout(() => (this.loading = false), 500)
         //获取作者信息
         this.getAuthor()
         //获取文章分类信息
