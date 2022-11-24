@@ -9,12 +9,12 @@
                         <el-input prefix-icon="el-icon-user-solid" v-model="ruleForm.username"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="pass">
-                        <el-input prefix-icon="el-icon-lock" type="password" show-password="true"
-                            v-model="ruleForm.pass" autocomplete="off">
+                        <el-input prefix-icon="el-icon-lock" type="password" v-model="ruleForm.pass" autocomplete="off">
                         </el-input>
                     </el-form-item>
                     <el-form-item style="margin-bottom:0;">
                         <div class="buttons">
+                            <!-- <el-button type="primary"  @keyup.enter="goHome">提交</el-button> -->
                             <el-button type="primary" @click="goHome">提交</el-button>
                             <el-button type="primary" @click="resetForm('ruleForm')">重置</el-button>
                             <el-button type="primary" @click="goRegister">注册</el-button>
@@ -70,7 +70,6 @@ export default {
                 lett.goHome();
             }
         }
-
     },
     mounted() {
     },
@@ -78,7 +77,6 @@ export default {
         ...mapState({ tokenInfo: (state) => state.Login.tokenInfo }),
         ...mapState({ login: (state) => state.Login.login }),
         ...mapState({ errors: (state) => state.Login.errors })
-
     },
     watch: {
         //当login值发生变化是进行路由跳转
@@ -87,7 +85,6 @@ export default {
             this.$router.push('/homepage');
             this.$message({ message: '恭喜你，成功登录！', type: 'success' });
             this.userInfo = JSON.parse(localStorage.getItem('userMsg'));
-            // console.log('@@@@@', this.userInfo)
             this.$bus.$emit('userInfo', this.userInfo)
         },
         errors() {
@@ -107,7 +104,6 @@ export default {
             } else {
                 this.$message.error('账号或密码不能为空！')
             }
-
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();
@@ -123,8 +119,6 @@ export default {
 </script>
 <style scoped>
 /*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
-
-
 .box {
     height: 100vh;
     /* background-image: url(http://localhost:5005/public/upload_image/article/10_9/e57b08aeda927adcb99640a116_2022_10_9_18_30_44.jpg) !important; */
@@ -138,15 +132,6 @@ export default {
     align-items: center;
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    -webkit-background-size: cover !important;
-    -moz-background-size: cover !important;
-    -o-background-size: cover !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
     background-color: #f8f6f6;
 }
 
@@ -161,7 +146,7 @@ export default {
     margin-right: 50px;
 }
 
-.buttons { 
+.buttons {
     width: 240px;
 }
 </style>

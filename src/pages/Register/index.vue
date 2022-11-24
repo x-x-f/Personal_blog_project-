@@ -11,13 +11,12 @@
                     <el-form-item label="密码" prop="pass">
                         <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
                     </el-form-item>
-                    <!--slot="append" -->
                     <el-form-item label="邮箱" prop="email">
                         <el-input v-model="ruleForm.email" autocomplete="off">
                             <el-button slot="append" style="color: black;background-color: #fff" v-show="showTime"
-                                @click="sendEmail(ruleForm.email)">{{show}}</el-button>
+                                @click="sendEmail(ruleForm.email)">{{ show }}</el-button>
                             <el-button slot="append" style="color: red;background-color: #fff;margin-left: -20px"
-                                v-show="!showTime">{{sendTime}}秒</el-button>
+                                v-show="!showTime">{{ sendTime }}秒</el-button>
                         </el-input>
                     </el-form-item>
                     <el-form-item label="验证码" prop="code" v-show="reshowTime">
@@ -78,6 +77,15 @@ export default {
                 code: [
                     { required: true, trigger: 'blur' }
                 ]
+            }
+        }
+    },
+    created() {
+        var lett = this;
+        document.onkeydown = function (e) {
+            var key = window.event.keyCode;
+            if (key == 13) {
+                lett.confirmRegister();
             }
         }
     },
@@ -207,7 +215,8 @@ export default {
 .fromclass {
     margin-right: 50px;
 }
-.buttons{
+
+.buttons {
     width: 240px;
 }
 </style>

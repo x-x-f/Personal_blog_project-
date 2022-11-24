@@ -12,7 +12,7 @@
                         首页
                     </li>
                 </router-link>
-                <a href="http://game.xxfcloud.top">
+                <a href="http://game.xxfcloud.top" target="_blank">
                     <li>
                         小游戏
                     </li>

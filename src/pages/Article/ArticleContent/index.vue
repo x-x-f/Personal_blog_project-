@@ -2,9 +2,9 @@
     <div>
         <header class="header">
             <h2>
-                {{article.title}}
+                {{ article.title }}
             </h2>
-            <div class="pub_date">{{author}} • 发表于<span>{{article.pub_date}}</span></div>
+            <div class="pub_date">{{ author }} • 发表于<span>{{ article.pub_date }}</span></div>
         </header>
         <article v-html="article.htmlText" class="markdown-body"></article>
     </div>
@@ -22,7 +22,7 @@ export default {
     props: ['author', 'article_id'],
     watch: {
         article_id() {
-            // console.log('发生了改变')
+            console.log('发生了改变')
             this.$store.dispatch('getArticle', this.$route.params.id)
         },
     },
@@ -43,7 +43,6 @@ export default {
                 this.article.title = result.data[0].title;
                 this.article.pub_date = result.data[0].pub_date;
             }
-
         },
     },
     beforeDestroy() {
@@ -52,7 +51,6 @@ export default {
 }
 </script>
 <style scoped>
-
 h2 {
     margin: 10px 0px;
     text-align: center;

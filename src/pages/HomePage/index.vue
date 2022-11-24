@@ -5,7 +5,7 @@
         </div>
         <div class="headers">
             <div class="header_word">
-                <span @click="changeImage">hi{{name==='0000'?'':','+name}}</span>
+                <span @click="changeImage">hi{{ name === '0000' ? '' : ',' + name }}</span>
             </div>
             <div class="header_information">
                 <!-- <div class="avtar"></div> -->
@@ -20,20 +20,20 @@
                 <CardHot></CardHot>
                 <CardList></CardList>
             </div>
-            <div :class="nacshow ? 'content_left':'content_left_off'" id="position">
+            <div :class="nacshow ? 'content_left' : 'content_left_off'" id="position">
                 <div class="sort_content">
                     排序方式：
                     <span class="span1" style="color:#409EFF" @click="span_defau" id="position">默认</span>|
-                    <span class="span2" @click="span_new">最新</span>|
-                    <span class="span3" @click="span_hot">最热</span>
+                    <span class="span3" @click="span_hot">最热</span>|
+                    <span class="span2" @click="span_new">最新</span>
                 </div>
                 <ul>
-                    <li v-for="(item,index) in articles" :key="index">
+                    <li v-for="(item, index) in articles" :key="index">
                         <card-page :article=item :nacshow=nacshow>
                         </card-page>
                     </li>
                 </ul>
-                <el-button class="getmore" @click="updateDate">{{tips}}</el-button>
+                <el-button class="getmore" @click="updateDate">{{ tips }}</el-button>
             </div>
         </div>
     </div>
@@ -113,8 +113,8 @@ export default {
         })
         this.span_defau();
         // setTimeout(() => {
-            //函数体
-            this.movePosition();
+        //函数体
+        this.movePosition();
         // }, 0)
 
     },
