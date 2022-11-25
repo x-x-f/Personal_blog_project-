@@ -3,7 +3,6 @@
     <div class="nav">
         <div class="sign" v-show="nacshow">
             <span class="sign-span"></span><br>
-            <!-- <span @click="showWord">{{word}}</span> -->
         </div>
         <div class="nav-left">
             <ul>
@@ -88,7 +87,6 @@ export default {
         }
     },
     mounted() {
-        this.showWord()
         //判断宽距是否大于900
         if (document.body.clientWidth <= 900) {
             this.nacshow = false;
@@ -111,12 +109,6 @@ export default {
         })
     },
     methods: {
-        showWord() {
-            // console.log('开启了一个定时器')
-            setInterval(() => {
-                // this.$store.dispatch('getWordList')
-            }, 30000)
-        },
         isLogined() {
             delToken()
             this.$store.dispatch('isLogined')

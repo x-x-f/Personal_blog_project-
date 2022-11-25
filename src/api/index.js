@@ -20,12 +20,12 @@ export const reqGetLoginApi = (params) =>
     data: params,
   });
 // https://api.uixsj.cn/hitokoto/get?type=social
-//获取每日一句
-export const reqGetWordApi = () =>
-  request2({
-    url: "https://api.uixsj.cn/hitokoto/get?type=social",
-    method: "get",
-  });
+// //获取每日一句
+// export const reqGetWordApi = () =>
+//   request2({
+//     url: "https://api.uixsj.cn/hitokoto/get?type=social",
+//     method: "get",
+//   });
 //注册用户
 export const reqSendRegisterApi = (params) =>
   requests({
