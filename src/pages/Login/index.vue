@@ -5,7 +5,7 @@
             <div class="fromclass">
                 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
                     class="demo-ruleForm">
-                    <el-form-item label="账号" prop="name">
+                    <el-form-item label="账号" prop="username">
                         <el-input prefix-icon="el-icon-user-solid" v-model="ruleForm.username"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="pass">
@@ -44,15 +44,24 @@ export default {
                 callback();
             }
         };
+        var validateName = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入用户名'));
+            } else {
+                if (this.ruleForm.checkPass !== '') {
+                    this.$refs.ruleForm.validateField('checkPass');
+                }
+                callback();
+            }
+        };
         return {
             ruleForm: {
                 username: '',
                 pass: '',
             },
             rules: {
-                name: [
-                    // { required: true, message: '请正确输入账号', trigger: 'blur' },
-                    { required: true, validator: validatePass, trigger: 'blur' }
+                username: [
+                    { required: true, validator: validateName, trigger: 'blur' }
                 ],
                 pass: [
                     { required: true, validator: validatePass, trigger: 'blur' }
@@ -88,7 +97,6 @@ export default {
             this.$bus.$emit('userInfo', this.userInfo)
         },
         errors() {
-            // console.log(this.errors)
             this.$message.error(this.errors[this.errors.length - 1])
         }
     }

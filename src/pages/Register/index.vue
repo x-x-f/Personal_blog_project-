@@ -6,10 +6,10 @@
                 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
                     class="demo-ruleForm">
                     <el-form-item label="账号" prop="name">
-                        <el-input v-model="ruleForm.username"></el-input>
+                        <el-input v-model="ruleForm.name"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="pass">
-                        <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                        <el-input type="password" v-model="ruleForm.pass" autocomplete="off" show-password></el-input>
                     </el-form-item>
                     <el-form-item label="邮箱" prop="email">
                         <el-input v-model="ruleForm.email" autocomplete="off">
@@ -40,9 +40,39 @@ import { reqSendRegisterApi, reqsendCodeApi } from "@/api"
 export default {
     name: 'Register',
     data() {
-        var validatePass = (rule, value, callback) => {
+        const validateName = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入用户名'));
+            } else {
+                if (this.ruleForm.checkPass !== '') {
+                    this.$refs.ruleForm.validateField('checkPass');
+                }
+                callback();
+            }
+        };
+        const validatePass = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请输入密码'));
+            } else {
+                if (this.ruleForm.checkPass !== '') {
+                    this.$refs.ruleForm.validateField('checkPass');
+                }
+                callback();
+            }
+        };
+        const validateEmail = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入邮箱'));
+            } else {
+                if (this.ruleForm.checkPass !== '') {
+                    this.$refs.ruleForm.validateField('checkPass');
+                }
+                callback();
+            }
+        };
+        const validateCode = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入验证码'));
             } else {
                 if (this.ruleForm.checkPass !== '') {
                     this.$refs.ruleForm.validateField('checkPass');
@@ -58,26 +88,26 @@ export default {
             reshowTime: false,
             fullscreenLoading: false,
             ruleForm: {
-                username: '',
+                name: '',
                 pass: '',
                 email: '',
                 code: ''
             },
             rules: {
                 name: [
-                    // { required: true, message: '请正确输入账号', trigger: 'blur' },
-                    { required: true, validator: validatePass, trigger: 'blur' }
+                    { required: true, validator: validateName, trigger: 'blur' }
                 ],
                 pass: [
                     { required: true, validator: validatePass, trigger: 'blur' }
                 ],
                 email: [
-                    { required: true, trigger: 'blur' }
+                    { required: true, validator: validateEmail, trigger: 'blur' }
                 ],
                 code: [
-                    { required: true, trigger: 'blur' }
+                    { required: true, validator: validateCode, trigger: 'blur' }
                 ]
-            }
+            },
+            emailTest: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$///定义邮箱的验证规则
         }
     },
     created() {
@@ -91,10 +121,10 @@ export default {
     },
     methods: {
         async confirmRegister() {
-            if (!(this.ruleForm.username.trim() && this.ruleForm.pass.trim() && this.ruleForm.email.trim() && this.ruleForm.code.trim()))
+            if (!(this.ruleForm.name.trim() && this.ruleForm.pass.trim() && this.ruleForm.email.trim() && this.ruleForm.code.trim()))
                 return this.$message.error('信息不能为空！')
             const params = {
-                username: this.ruleForm.username,
+                username: this.ruleForm.name,
                 password: this.ruleForm.pass,
                 email: this.ruleForm.email,
                 code: this.ruleForm.code
@@ -141,39 +171,39 @@ export default {
         /*发送验证码时，开始计数，一分钟发送一次*/
         async sendEmail(email) {
             let params = {
-                username: this.ruleForm.username,
+                username: this.ruleForm.name,
                 email: email
             }
-            if (!(this.ruleForm.username && this.ruleForm.email.trim()))
+            if (!(this.ruleForm.email.trim()))
                 return this.$message.error('邮箱不能为空！')
-            // console.log(params)
-            const result = await reqsendCodeApi(params)
-            // const result = 0
-            // console.log(result)
-            if (result.status) {
-                return this.$message.error(result.message)
-            }
-            this.reshowTime = true;
-            const TIME_COUNT = 60; //  更改倒计时时间
-            if (!this.timer) {
-
-                this.sendTime = TIME_COUNT;
-                this.showTime = false;
-                this.$message({
-                    message: '发送验证码成功！',
-                    type: 'success'
-                })
-
-                this.timer = setInterval(() => {
-                    if (this.sendTime > 0 && this.sendTime <= TIME_COUNT) {
-                        this.sendTime--;
-                    } else {
-                        this.showTime = true;
-                        this.show = '重新发送'
-                        clearInterval(this.timer); // 清除定时器
-                        this.timer = null;
-                    }
-                }, 1000);
+            if (this.emailTest.test(params.email)) {
+                const result = await reqsendCodeApi(params)
+                if (result.status) {
+                    return this.$message.error(result.message)
+                }
+                this.reshowTime = true;
+                const TIME_COUNT = 60; //  更改倒计时时间
+                if (!this.timer) {
+                    this.sendTime = TIME_COUNT;
+                    this.showTime = false;
+                    this.$message({
+                        message: '发送验证码成功！',
+                        type: 'success'
+                    })
+                    this.timer = setInterval(() => {
+                        if (this.sendTime > 0 && this.sendTime <= TIME_COUNT) {
+                            this.sendTime--;
+                        } else {
+                            this.showTime = true;
+                            this.show = '重新发送'
+                            clearInterval(this.timer); // 清除定时器
+                            this.timer = null;
+                        }
+                    }, 1000);
+                }
+            } else {
+                this.$message.error('邮箱的格式不正确哦！请重新输入！')
+                this.ruleForm.email = '';
             }
         }
     }
@@ -183,8 +213,6 @@ export default {
 .box {
     height: 100vh;
     /* background-image: url(http://localhost:5005/public/upload_image/article/10_9/b2e5291802faecbb03e186282f_2022_10_9_18_30_9.jpg) !important; */
-    /* background: skyblue !important; */
-    /* background: #fff !important; */
     /* 页面的背景图片，可以修改 */
     opacity: 1;
     display: flex;
