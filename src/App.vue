@@ -50,7 +50,7 @@ export default {
             this.top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
         })
         //监测浏览器宽距大小
-        const that = this
+        const that = this;
         window.addEventListener('resize', function () {
             // console.log("onresize")
             that.ScreenWidthOnsize();
@@ -60,7 +60,7 @@ export default {
     //自定义事件，使鼠标可拖动导航栏移动
     directives: {
         drag(el) {
-            let oDiv = el // 当前元素
+            let oDiv = el; // 当前元素
             // let self = this // 上下文
             // 禁止选择网页上的文字
             // document.onselectstart = function () {
@@ -79,8 +79,8 @@ export default {
                     oDiv.style.top = t + 'px'
                 }
                 document.onmouseup = function (e) {
-                    document.onmousemove = null
-                    document.onmouseup = null
+                    document.onmousemove = null;
+                    document.onmouseup = null;
                 }
                 // return false不加的话可能导致黏连，就是拖到一个地方时div粘在鼠标上不下来，相当于onmouseup失效
                 return false

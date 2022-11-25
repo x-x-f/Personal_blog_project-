@@ -23,7 +23,7 @@ export default {
     props: ['author', 'article_id'],
     watch: {
         article_id() {
-            console.log('发生了改变')
+            // console.log('发生了改变')
             this.$store.dispatch('getArticle', this.$route.params.id)
         },
     },

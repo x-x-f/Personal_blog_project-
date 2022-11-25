@@ -4,14 +4,12 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 //引入小仓库
 import Login from "./Login";
-import Home from "./Home";
 import Card from "./Card";
 import Homepage from "./Homepage";
 //对外暴露store的实例
 export default new Vuex.Store({
   modules: {
     Login: Login,
-    Home: Home,
     Card: Card,
     Homepage: Homepage,
   },

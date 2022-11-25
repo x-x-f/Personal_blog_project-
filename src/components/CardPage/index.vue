@@ -21,7 +21,6 @@
                         {{ cate_name }}
                     </span>
                 </el-tooltip>
-                <!-- <article v-html="htmlCode" v-highlight class="markdown-body"></article> -->
                 <header class="header">
                     <h2>
                         <a @click="goArticle">
@@ -93,7 +92,7 @@ export default {
         //转换时间
         becomedate() {
             let date = new Date(this.article.pub_date)
-            console.log(this.article.pub_date)
+            // console.log(this.article.pub_date);
             let year = date.getFullYear();
             let month = date.getMonth() + 1;
             let day = date.getDate()

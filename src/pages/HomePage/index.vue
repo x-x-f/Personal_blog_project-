@@ -97,9 +97,7 @@ export default {
         }
         //判断token是否还有效
         if (getToken()) {
-            // if (!this.userMsg.username) {
             this.$store.dispatch('reqGetLoginInfo')
-            // }
         }
         this.loading = true
         setTimeout(() => (this.loading = false), 300)
@@ -112,11 +110,7 @@ export default {
             this.nacshow = data;
         })
         this.span_defau();
-        // setTimeout(() => {
-        //函数体
         this.movePosition();
-        // }, 0)
-
     },
     methods: {
         //scrollIntoView()方法将调用它的元素滚动到浏览器窗口的可见区域。
@@ -148,7 +142,7 @@ export default {
             span.style.color = ''
             var span = document.querySelector('.span1')
             span.style.color = '#409EFF'
-            console.log('执行了')
+            // console.log('执行了');
             this.page = 1;
             this.isUpdate = true
             this.tips = '加载更多'
@@ -195,7 +189,6 @@ export default {
             if (result.status) {
                 this.$message.error(result.message)
             }
-            console.log(result)
             this.articles = result.data;
             this.sumpage = result.sumpage
         },

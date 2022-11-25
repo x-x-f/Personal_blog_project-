@@ -16,18 +16,17 @@ const state = {
   },
 };
 const actions = {
+  //发送文章请求
   async getArticle(context, id) {
     const result = await reqgetArticleApi(id);
 
     if (result.status) {
       console.log("信息获取失败");
     }
-    // console.log(result);
     const result2 = await reqgetCateApi(result.data[0].cate_id);
     if (result2.status) {
       console.log("信息获取失败");
     }
-    // console.log(result2);
     context.commit("GETARTICLE", [result.data[0], result2.data[0]]);
   },
 };

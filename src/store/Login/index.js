@@ -49,7 +49,6 @@ const actions = {
             context.commit('ERRORS', '登录信息已失效！请重新登录')
         } else {
             //返回用户数据成功！
-            console.log('重新获取数据成功！')
             localStorage.setItem('userMsg', JSON.stringify(result.data))
             context.commit('REQGETLOGININFO', result.data)
         }
