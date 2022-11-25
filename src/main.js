@@ -32,16 +32,19 @@ Vue.use(mavonEditor);
 //引入showdown
 import showdown from "showdown";
 Vue.use(showdown);
-import hljs from "highlight.js";
-import "highlight.js/styles/default.css";
-
 // 代码高亮
+import hljs from "highlight.js";
+Vue.use(hljs);
 Vue.directive("highlight", function (el) {
   let blocks = el.querySelectorAll("pre code");
   blocks.forEach((block) => {
     hljs.highlightBlock(block);
+    // 从这开始是设置行号
+    block.innerHTML = `<ol><li>${block.innerHTML.replace(
+      /\n/g,`</li><li class="line">`)}</li></ol>`;
   });
 });
+
 //是否全屏插件
 import screenfull from "screenfull";
 Vue.use(screenfull);
